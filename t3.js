@@ -27,13 +27,19 @@ function cellClicked(e) {
         e.target.innerText = playerChars[playerTurn];
 
         let movePosition = JSON.parse(e.target.dataset.position);
+        let winningSpaces = checkForWinner(playerTurn, movePosition[0], movePosition[1]);
 
-        if (checkForWinner(playerTurn, movePosition[0], movePosition[1])) {
+        if (winningSpaces) {
             document.getElementById("info-message").innerText = `Player ${playerTurn} wins!`;
 
             // disable the board and enable reset option
             gameOver = true;
             document.querySelector(".game").classList.add("win");
+
+            // highlight the winning spaces
+            winningSpaces.forEach(function(cell) {
+                document.querySelector(`.game-cell[data-position="[${cell[0]},${cell[1]}]`).classList.add("winning-space");
+            })
         }
         else if (checkForStalemate()) {
             document.getElementById("info-message").innerText = `The game has ended in a stalemate.`;
@@ -65,6 +71,7 @@ function playAgain() {
     // update the display content and options
     document.getElementById("info-message").innerText = `It's Player 1's turn.`;
     document.querySelector(".game").classList.remove("win", "tie");
+    document.querySelectorAll(".game-cell").forEach(function(cell) { cell.classList.remove("winning-space"); });
 }
 
 /**
@@ -72,35 +79,48 @@ function playAgain() {
  * @param {number} player - The player number of the current player to check
  * @param {number} moveRow - The row index of the last move
  * @param {number} moveCol - The column index of the last move
- * @returns {boolean}
+ * @returns {Object} array of winning space indexes, otherwise nothing
  */
 function checkForWinner(player, moveRow, moveCol) {
+    var winningSpaces = []; // keep track of the potential winning spaces
+
     // check the current row
     for (let i = 0; i < 3; i++) {
         if (document.querySelector(`.game-cell[data-position="[${moveRow},${i}]`).innerText != playerChars[player]) break;
-        
-        if (i == 2) return true; // if we got this far then it's a winner!
+
+        winningSpaces.push([moveRow,i]);
+
+        if (i == 2) return winningSpaces; // if we got this far then it's a winner!
     }
+    winningSpaces = [];
 
     // check the current column
     for (let i = 0; i < 3; i++) {
         if (document.querySelector(`.game-cell[data-position="[${i},${moveCol}]`).innerText != playerChars[player]) break;
+
+        winningSpaces.push([i,moveCol]);
         
-        if (i == 2) return true; // if we got this far then it's a winner!
+        if (i == 2) return winningSpaces; // if we got this far then it's a winner!
     }
+    winningSpaces = [];
 
     // check the diagonal
     for (let i = 0; i < 3; i++) {
         if (document.querySelector(`.game-cell[data-position="[${i},${i}]`).innerText != playerChars[player]) break;
+
+        winningSpaces.push([i,i]);
         
-        if (i == 2) return true; // if we got this far then it's a winner!
+        if (i == 2) return winningSpaces; // if we got this far then it's a winner!
     }
+    winningSpaces = [];
 
     // check the reverse diagonal
     for (let i = 0; i < 3; i++) {
         if (document.querySelector(`.game-cell[data-position="[${i},${2-i}]`).innerText != playerChars[player]) break;
+
+        winningSpaces.push([i,2-i]);
         
-        if (i == 2) return true; // if we got this far then it's a winner!
+        if (i == 2) return winningSpaces; // if we got this far then it's a winner!
     }
 
     return false;

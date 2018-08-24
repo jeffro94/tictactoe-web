@@ -70,6 +70,10 @@ button {
     background-color: #ffc977;
 }
 
+.game-cell.winning-space {
+    background-color: #11ce11 !important;;
+}
+
 .game.win .game-board, .game.tie .game-board {
     cursor: not-allowed !important;
 }
