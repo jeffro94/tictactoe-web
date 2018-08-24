@@ -1,0 +1,52 @@
+.game-info {
+    margin-top: 30px;
+    height: 40px;
+    font-size: 20px;
+}
+
+.game-board {
+    margin-top: 40px;
+    font-size: 36px;
+}
+
+#info-message {
+    margin-right: 10px;
+}
+
+.game-cell {
+    width: 120px;
+    height: 120px;
+    padding: 5px;
+    border: solid 3px #999999;
+    cursor: default;
+
+    /* for center alignment of the cell values */
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+.game-row {
+    margin: 0px;
+}
+
+.game-cell:first-child {
+    border-left: none;
+}
+
+.game-cell:last-child {
+    border-right: none;
+}
+
+.game-row:first-child .game-cell {
+    border-top: none;
+}
+
+.game-row:last-child .game-cell {
+    border-bottom: none;
+}
+
+.game-board.disabled .game-cell {
+    background: #bbbbbb;
+    cursor: not-allowed !important;
+}
