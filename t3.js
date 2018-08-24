@@ -33,18 +33,14 @@ function cellClicked(e) {
 
             // disable the board and enable reset option
             gameOver = true;
-            document.querySelector(".game-board").classList.add("disabled");
-            document.getElementById("btnPlayAgain").hidden = false;
-            document.getElementById("btnPlayAgain").classList.add("btn-outline-success");
+            document.querySelector(".game").classList.add("win");
         }
         else if (checkForStalemate()) {
             document.getElementById("info-message").innerText = `The game has ended in a stalemate.`;
 
             // disable the board and enable reset option
             gameOver = true;
-            document.querySelector(".game-board").classList.add("disabled");
-            document.getElementById("btnPlayAgain").hidden = false;
-            document.getElementById("btnPlayAgain").classList.add("btn-outline-warning");
+            document.querySelector(".game").classList.add("tie");
         }
         else {
             // set the next player as active
@@ -68,9 +64,7 @@ function playAgain() {
 
     // update the display content and options
     document.getElementById("info-message").innerText = `It's Player 1's turn.`;
-    document.querySelector(".game-board").classList.remove("disabled");
-    document.getElementById("btnPlayAgain").hidden = true;
-    document.getElementById("btnPlayAgain").classList.remove("btn-outline-success", "btn-outline-warning");
+    document.querySelector(".game").classList.remove("win", "tie");
 }
 
 /**

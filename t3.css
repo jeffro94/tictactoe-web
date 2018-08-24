@@ -1,6 +1,23 @@
+@media (min-width: 640px) {
+    body {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
 .game-info {
     margin-top: 30px;
     height: 40px;
+    font-size: 20px;
+}
+
+button {
+    -webkit-appearance: none;
+    -moz-appearance: none; 
     font-size: 20px;
 }
 
@@ -9,25 +26,20 @@
     font-size: 36px;
 }
 
-#info-message {
-    margin-right: 10px;
+.game-row {
+    display: flex;
 }
 
 .game-cell {
-    width: 120px;
-    height: 120px;
-    padding: 5px;
+    width: 125px;
+    height: 125px;
     border: solid 3px #999999;
     cursor: default;
 
-    /* for center alignment of the cell values */
-    display: flex; 
+    /* center align the cell values */
+    display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.game-row {
-    margin: 0px;
 }
 
 .game-cell:first-child {
@@ -46,7 +58,18 @@
     border-bottom: none;
 }
 
-.game-board.disabled .game-cell {
-    background: #bbbbbb;
+.game.win .game-info #btnPlayAgain, .game.tie .game-info #btnPlayAgain {
+    display: inline-block;
+}
+
+.game.win .game-board .game-row .game-cell {
+    background-color: #76ff76;
+}
+
+.game.tie .game-board .game-row .game-cell {
+    background-color: #ffc977;
+}
+
+.game.win .game-board, .game.tie .game-board {
     cursor: not-allowed !important;
 }
