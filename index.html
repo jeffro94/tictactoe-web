@@ -14,6 +14,19 @@
             <span id="info-message">Welcome! This game supports two players. It's Player 1's turn.</span>  
             <button id="btnPlayAgain" type="button" hidden>Play Again</button>
         </div>
+        <div class="game-options">
+            <div>
+                <span>Player 2 Auto-Play</span>
+                <input type="checkbox" id="autoPlay" checked />
+            </div>
+            <div>
+                <span>Difficulty Level</span>
+                <select id="difficulty">
+                    <option>1</option>
+                    <option selected>2</option>
+                </select>
+            </div>
+        </div>
         <div class="game-board">
             <div class="game-row">
                 <div class="game-cell" data-position="[0,0]"></div>
