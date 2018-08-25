@@ -1,12 +1,12 @@
 # Tic-Tac-Toe
 
-#### Overview
+### Overview
 
-This is an implementation of Tic-Tac-Toe that runs in the browser. Implemented using vanilla HTML5/CSS3/ES6
+This is an implementation of Tic-Tac-Toe that runs in the browser. Implemented using vanilla HTML5/CSS3/JavaScript(ES6).
 
 See and play the game at: https://jeffro94.github.io/tictactoe-web/
 
-#### Rules for AI
+### Rules for AI
 
 Level 1
 - Randomly select an available space
