@@ -39,7 +39,7 @@ function makeAIMove(difficulty) {
         do {
             moveRow = Math.floor(Math.random() * 3);
             moveCol = Math.floor(Math.random() * 3);
-        } while (document.querySelector(`.game-cell[data-position="[${moveRow},${moveCol}]`).innerText == "");
+        } while (document.querySelector(`.game-cell[data-position="[${moveRow},${moveCol}]`).innerText != "");
     } 
     else {
         // Level 2: First, try the middle spot. if occupied then,
