@@ -10,11 +10,11 @@ let playerTurn = 1;
 // game status flag: set to true once a player wins or stalemate is reached
 let gameOver = false;
 
-// set up the click event listeners for game cells & reset button
+// set up the event listeners for game cells & reset button
 document.querySelectorAll(".game-cell").forEach(function(cell) {
     cell.addEventListener("click", cellClicked);
+    cell.addEventListener("touchstart", cellClicked);
 });
-
 document.getElementById("btnPlayAgain").addEventListener("click", playAgain);
 
 // this function handles a cell-click event. if the game is not over
