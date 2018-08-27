@@ -15,6 +15,3 @@ Level 2
 - Try the center space
 - Try the corner spaces (in random order)
 - Try the side spaces (in random order)
-
-Level 3
-- Not implemented

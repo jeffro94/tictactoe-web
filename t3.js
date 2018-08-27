@@ -13,7 +13,6 @@ let gameOver = false;
 // set up the event listeners for game cells & reset button
 document.querySelectorAll(".game-cell").forEach(function(cell) {
     cell.addEventListener("click", cellClicked);
-    cell.addEventListener("touchstart", cellClicked);
 });
 document.getElementById("btnPlayAgain").addEventListener("click", playAgain);
 
@@ -39,7 +38,7 @@ function makeAIMove(difficulty) {
         do {
             moveRow = Math.floor(Math.random() * 3);
             moveCol = Math.floor(Math.random() * 3);
-        } while (document.querySelector(`.game-cell[data-position="[${moveRow},${moveCol}]`).innerText != "");
+        } while (document.querySelector(`.game-cell[data-position="[${moveRow},${moveCol}]"]`).innerText != "");
     } 
     else {
         // Level 2: First, try the middle spot. if occupied then,
@@ -47,13 +46,13 @@ function makeAIMove(difficulty) {
         //  try the four center-side spots in a random order
         moveRow = moveCol = 1;
         let validMove = false;
-        if (document.querySelector(`.game-cell[data-position="[${moveRow},${moveCol}]`).innerText == "") validMove = true;
+        if (document.querySelector(`.game-cell[data-position="[${moveRow},${moveCol}]"]`).innerText == "") validMove = true;
 
         if (!validMove) {
             let corners = [[0,0], [0,2], [2,0], [2,2]];
             shuffleArray(corners); // randomize the order;
             for (let i = 0; i < 4; i++) {
-                if (document.querySelector(`.game-cell[data-position="[${corners[i][0]},${corners[i][1]}]`).innerText == "") {
+                if (document.querySelector(`.game-cell[data-position="[${corners[i][0]},${corners[i][1]}]"]`).innerText == "") {
                     moveRow = corners[i][0];
                     moveCol = corners[i][1];
                     validMove = true;
@@ -66,7 +65,7 @@ function makeAIMove(difficulty) {
             let sides = [[0,1], [1,2], [2,1], [1,0]];
             shuffleArray(sides); // randomize the order;
             for (let i = 0; i < 4; i++) {
-                if (document.querySelector(`.game-cell[data-position="[${sides[i][0]},${sides[i][1]}]`).innerText == "") {
+                if (document.querySelector(`.game-cell[data-position="[${sides[i][0]},${sides[i][1]}]"]`).innerText == "") {
                     moveRow = sides[i][0];
                     moveCol = sides[i][1];
                     validMove = true;
@@ -85,7 +84,7 @@ function makeAIMove(difficulty) {
 //
 function makeMove(player, moveRow, moveCol) {
     // update the cell with the appopriate move
-    document.querySelector(`.game-cell[data-position="[${moveRow},${moveCol}]`).innerText = playerChars[player];
+    document.querySelector(`.game-cell[data-position="[${moveRow},${moveCol}]"]`).innerText = playerChars[player];
 
     let winningSpaces = checkForWinner(player, moveRow, moveCol);
 
@@ -98,7 +97,7 @@ function makeMove(player, moveRow, moveCol) {
 
         // highlight the winning spaces
         winningSpaces.forEach(function(cell) {
-            document.querySelector(`.game-cell[data-position="[${cell[0]},${cell[1]}]`).classList.add("winning-space");
+            document.querySelector(`.game-cell[data-position="[${cell[0]},${cell[1]}]"]`).classList.add("winning-space");
         })
     }
     else if (checkForStalemate()) {
@@ -149,7 +148,7 @@ function checkForWinner(player, moveRow, moveCol) {
 
     // check the current row
     for (let i = 0; i < 3; i++) {
-        if (document.querySelector(`.game-cell[data-position="[${moveRow},${i}]`).innerText != playerChars[player]) break;
+        if (document.querySelector(`.game-cell[data-position="[${moveRow},${i}]"]`).innerText != playerChars[player]) break;
 
         winningSpaces.push([moveRow,i]);
 
@@ -159,7 +158,7 @@ function checkForWinner(player, moveRow, moveCol) {
 
     // check the current column
     for (let i = 0; i < 3; i++) {
-        if (document.querySelector(`.game-cell[data-position="[${i},${moveCol}]`).innerText != playerChars[player]) break;
+        if (document.querySelector(`.game-cell[data-position="[${i},${moveCol}]"]`).innerText != playerChars[player]) break;
 
         winningSpaces.push([i,moveCol]);
         
@@ -169,7 +168,7 @@ function checkForWinner(player, moveRow, moveCol) {
 
     // check the diagonal
     for (let i = 0; i < 3; i++) {
-        if (document.querySelector(`.game-cell[data-position="[${i},${i}]`).innerText != playerChars[player]) break;
+        if (document.querySelector(`.game-cell[data-position="[${i},${i}]"]`).innerText != playerChars[player]) break;
 
         winningSpaces.push([i,i]);
         
@@ -179,7 +178,7 @@ function checkForWinner(player, moveRow, moveCol) {
 
     // check the reverse diagonal
     for (let i = 0; i < 3; i++) {
-        if (document.querySelector(`.game-cell[data-position="[${i},${2-i}]`).innerText != playerChars[player]) break;
+        if (document.querySelector(`.game-cell[data-position="[${i},${2-i}]"]`).innerText != playerChars[player]) break;
 
         winningSpaces.push([i,2-i]);
         
